@@ -12,6 +12,8 @@ public class GamblingSimulator {
 	public static int daysLose=0;
 	public static ArrayList<Integer> luckyDays = new ArrayList<Integer>();
 	public static ArrayList<Integer> unluckyDays=new ArrayList<Integer>();
+	public static int netAmount=0;
+	static Scanner sc=new Scanner(System.in);
 	
 	
 	
@@ -67,9 +69,24 @@ public class GamblingSimulator {
 		System.out.println(luckyDays);
 		System.out.println(unluckyDays);
 	}
+	public static void nextMonth() {
+		netAmount=netReturn();
+		if(netAmount>0)
+			{
+			System.out.println("Won");
+			System.out.println("Enter 1 to continue and 2 to exit");
+			int choice=sc.nextInt();
+			if(choice==1)
+			nextMonth();
+			else
+				System.out.println("Stop Playing");
+			}
+		else
+			System.out.println("lost");
+	}
     public static void main(String[] args) {
-	    int netAmount=netReturn();
-    	luckyOrUnluckyDay();
+	    nextMonth();
+    
     		
 }
 }
