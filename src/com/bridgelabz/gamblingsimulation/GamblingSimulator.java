@@ -1,5 +1,5 @@
 package com.bridgelabz.gamblingsimulation;
-
+import java.util.*;
 public class GamblingSimulator {
 	public static final int INITIAL_STAKE_EVERYDAY = 100;
 	public static final int BET_EVERYGAME = 1;
@@ -10,6 +10,9 @@ public class GamblingSimulator {
 	public static final int NUMBER_OF_DAYS=20;
 	public static int daysWon=0;
 	public static int daysLose=0;
+	public static ArrayList<Integer> luckyDays = new ArrayList<Integer>();
+	public static ArrayList<Integer> unluckyDays=new ArrayList<Integer>();
+	
 	
 	
 	public static int play(int stake) {
@@ -35,10 +38,12 @@ public class GamblingSimulator {
     		int balance=calculativeGambler();
 			if(balance>INITIAL_STAKE_EVERYDAY) {
 				daysWon++;
+				luckyDays.add(day);
 				netAmount+=balance-INITIAL_STAKE_EVERYDAY;
 			}
 			else {
 				daysLose++;
+				unluckyDays.add(day);
 				netAmount-=INITIAL_STAKE_EVERYDAY-balance;
 			}
 	     }
@@ -57,13 +62,14 @@ public class GamblingSimulator {
 			System.out.println("No outcome");
 		}
 	}
+	
+	public static void luckyOrUnluckyDay() {
+		System.out.println(luckyDays);
+		System.out.println(unluckyDays);
+	}
     public static void main(String[] args) {
 	    int netAmount=netReturn();
-    	if(netAmount>0)
-    		System.out.println("Player win amount = "+netAmount);
-    	else
-        	System.out.println("Player lose amount = "+Math.abs(netAmount));
-    	loseAndWinTrack();
+    	luckyOrUnluckyDay();
     		
 }
 }
